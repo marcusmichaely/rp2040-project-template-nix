@@ -1,6 +1,6 @@
 {
   inputs = {
-    nixpkgs.url = github:NixOS/nixpkgs;
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.05";
     rust-overlay.url = "github:oxalica/rust-overlay";
   };
 
@@ -13,18 +13,19 @@
       };
     in
     {
-      packages.x86_64-linux.elf2uf2-rs = pkgs.callPackage ./elf2uf2.nix { };
       devShell.x86_64-linux = pkgs.mkShell {
-        buildInputs = [
-          (pkgs.rust-bin.selectLatestNightlyWith (toolchain: toolchain.default.override {
+        buildInputs = with pkgs; [
+          (rust-bin.stable.latest.minimal.override {
             targets = [ "thumbv6m-none-eabi" ];
-            extensions = [ "rust-src" ];
-          }))
-          pkgs.rust-analyzer
-          pkgs.flip-link
-          pkgs.probe-run
-          self.packages.x86_64-linux.elf2uf2-rs
-          pkgs.rustfmt
+            extensions = [ "rust-src" "cargo" "rustc" ];
+          })
+          rust-analyzer
+          flip-link
+          probe-run
+          elf2uf2-rs
+          rustfmt
+          pkg-config
+          udev.dev
         ];
       };
     };
