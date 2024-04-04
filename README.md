@@ -1,3 +1,9 @@
+# picoboy_rs
+This this repository is a fork of the p2040-project-template (https://github.com/eyduh/rp2040-project-template-nix) and modified for the usage with [https://picoboy.de](https://picoboy.de)
+
+
+
+# The original README.md is shown below 
 **This is a fork of the rp2040-project-template (https://github.com/rp-rs/rp2040-project-template) that adds a Nix flake for easier usage with the Nix package manager. It might be outdated**
 
 # Project template for rp2040-hal with Nix support
